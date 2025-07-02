@@ -1,22 +1,3 @@
-// Variables
-
-// Cached Elements
-
-// Functions
-
-// Event Listeners (DOM)
-
-// 1. Try to get card to flip on click
-// const cards = document.querySelectorAll('.card')
-
-// cards.forEach((card) =>
-//   card.addEventListener('click', () => {
-//     card.style.backgroundColor = 'red'
-//   })
-// )
-
-//...cards, ...cards , will allow us after to loop
-//tilecount =.length helps with loop
 const cardsContainer = document.querySelector('.board')
 const imgs = [
   'red',
@@ -26,14 +7,10 @@ const imgs = [
   'purple',
   'teal',
   'pink',
-  'gold'
+  'orange'
 ]
 const imgsPickList = [...imgs, ...imgs]
 const boxCount = imgsPickList.length
-
-// let revealedCount = 0
-// let activeTile = null
-// let awaitingEndOfMove = false
 
 //build the tile
 for (let i = 0; i < boxCount; i++) {
@@ -43,6 +20,7 @@ for (let i = 0; i < boxCount; i++) {
 //to loop through the list
 const cardElements = []
 const cardImgs = []
+const flippedCards = []
 
 function creatCards() {
   for (let i = 0; i < imgsPickList.length; i++) {
@@ -59,13 +37,31 @@ function creatCards() {
   }
 }
 
+function flipCards(index) {
+  flippedCards.push(index)
+  console.log(flippedCards)
+  const img = cardImgs[index]
+  event.target.setAttribute('style', `background-color: ${img}`) // event.target finds the HTML element <div> we need to style
+  if (flippedCards.length === 2) {
+    let card1 = cardElements[flippedCards[0]]
+    console.log(card1.getAttribute('style'))
+    let card2 = cardElements[flippedCards[1]]
+    console.log(card2.getAttribute('style'))
+    if (card1.getAttribute('style') === card2.getAttribute('style')) {
+      console.log('match')
+    } else {
+      console.log('not a match')
+    }
+  }
+}
+
 creatCards()
 //the event lister
 const cards = document.querySelectorAll('.cardImgs')
 
-// for (let i = 0; i < cardImgs.length; i++) {
-//   cards[i].addEventListener('click', imgEl)
-// }
+for (let i = 0; i < cardElements.length; i++) {
+  cardElements[i].addEventListener('click', () => flipCards(i))
+}
 
 //toggle will help with the changing of images
 //class = card flipped
