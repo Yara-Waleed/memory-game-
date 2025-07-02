@@ -48,21 +48,24 @@ function creatCards() {
   for (let i = 0; i < imgsPickList.length; i++) {
     // create card
     const cardEl = document.createElement('div')
+    cardEl.classList.add('card')
     const img = document.createElement('img')
     cardEl.append(img)
     // add card to cards array
     cardElements.push(cardEl)
     // add image filename path to cardImages array
     cardImgs.push(imgsPickList[i])
+    cardsContainer.append(cardEl)
   }
 }
+
 creatCards()
 //the event lister
 const cards = document.querySelectorAll('.cardImgs')
 
-for (let i = 0; i < cardImgs.length; i++) {
-  cards[i].addEventListener('click', imgEl)
-}
+// for (let i = 0; i < cardImgs.length; i++) {
+//   cards[i].addEventListener('click', imgEl)
+// }
 
 //toggle will help with the changing of images
 //class = card flipped
