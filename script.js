@@ -39,19 +39,29 @@ const boxCount = imgsPickList.length
 for (let i = 0; i < boxCount; i++) {
   const randomIndex = Math.floor(Math.random() * imgsPickList.length) //picks a random index from the array
   const color = imgsPickList[randomIndex] //we get the color from the index
-  console.log(color)
 }
 //to loop through the list
-const cardElement = []
-const cardImg = []
+const cardElements = []
+const cardImgs = []
 
-const imgEl = document.createElement('img')
-
+function creatCards() {
+  for (let i = 0; i < imgsPickList.length; i++) {
+    // create card
+    const cardEl = document.createElement('div')
+    const img = document.createElement('img')
+    cardEl.append(img)
+    // add card to cards array
+    cardElements.push(cardEl)
+    // add image filename path to cardImages array
+    cardImgs.push(imgsPickList[i])
+  }
+}
+creatCards()
 //the event lister
-const cards = document.querySelectorAll('.cardImg')
+const cards = document.querySelectorAll('.cardImgs')
 
-for (let i = 0; i < cardImg.length; i++) {
-  cards[i].addEventListener('click', flipCards)
+for (let i = 0; i < cardImgs.length; i++) {
+  cards[i].addEventListener('click', imgEl)
 }
 
 //toggle will help with the changing of images
