@@ -1,0 +1,46 @@
+h1 {
+  font-family: 'Londrina Shadow', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-size: 90px;
+}
+body {
+  background-color: rgb(159, 204, 206);
+  text-align: center;
+}
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  border: 2px solid rgb(4, 70, 98);
+  height: 150px;
+  width: 150px;
+  margin: 20px;
+  align-items: center;
+}
+
+.back > img {
+  backface-visibility: hidden;
+  height: 120px;
+  width: 120px;
+  align-items: center;
+  padding: 10px;
+}
+
+.front > img {
+  height: 120px;
+  width: 120px;
+  align-items: center;
+  padding: 10px;
+  backface-visibility: hidden;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
