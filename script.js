@@ -10,7 +10,7 @@ const imgs = [
   'orange'
 ]
 const imgsPickList = [...imgs, ...imgs]
-const shuffledList = []
+let shuffledList = []
 const boxCount = imgsPickList.length
 const resetButtonEl = document.querySelector('#resetButton')
 const cards = document.querySelectorAll('.cardImgs')
@@ -19,6 +19,7 @@ let score = 0
 const init = () => {
   score = 0
   result.innerHTML = ''
+  shuffledList = []
   //build the tile
   for (let i = 0; i < boxCount; i++) {
     const randomIndex = Math.floor(Math.random() * imgsPickList.length) //picks a random index from the array
