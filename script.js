@@ -24,6 +24,8 @@ const init = () => {
   for (let i = 0; i < boxCount; i++) {
     const randomIndex = Math.floor(Math.random() * imgsPickList.length) //picks a random index from the array
     const color = imgsPickList[randomIndex] //we get the color from the index
+    imgsPickList.splice(randomIndex, 1)
+    console.log(imgsPickList)
     shuffledList.push(color)
   }
   console.log(shuffledList)
