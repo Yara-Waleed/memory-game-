@@ -15,11 +15,13 @@ const boxCount = imgsPickList.length
 const resetButtonEl = document.querySelector('#resetButton')
 const cards = document.querySelectorAll('.cardImgs')
 let score = 0
+const scoreDisplay = document.querySelector('.score')
 
 const init = () => {
   score = 0
   result.innerHTML = ''
   shuffledList = []
+  scoreDisplay.innerText = `Score: ${score}`
   //build the tile
   for (let i = 0; i < boxCount; i++) {
     const randomIndex = Math.floor(Math.random() * imgsPickList.length) //picks a random index from the array
@@ -78,6 +80,7 @@ function flipCards(index) {
     if (card1.getAttribute('style') === card2.getAttribute('style')) {
       console.log('match')
       score++
+      scoreDisplay.innerText = `Score: ${score}`
       flippedCards.length = 0 //it resets the indexes so we move to getting another two cards macthed
     } else {
       console.log('not a match')
@@ -101,3 +104,6 @@ const checkForWinner = () => {
 
 resetButtonEl.addEventListener('click', init)
 init()
+
+//i let the colors show i the begggining
+//i show the score
