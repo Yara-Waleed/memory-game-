@@ -25,23 +25,3 @@ body {
   align-items: center;
   /* background-image:  url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Londrina+Shadow&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap'); */
 }
-
-.back > img {
-  backface-visibility: hidden;
-  height: 120px;
-  width: 120px;
-  align-items: center;
-  padding: 10px;
-}
-
-.front > img {
-  height: 120px;
-  width: 120px;
-  align-items: center;
-  padding: 10px;
-  backface-visibility: hidden;
-}
-
-.card.flipped {
-  transform: rotateY(180deg);
-}

@@ -10,12 +10,24 @@ const imgs = [
   'orange'
 ]
 const imgsPickList = [...imgs, ...imgs]
+const shuffledList = []
 const boxCount = imgsPickList.length
+const resetButtonEl = document.querySelector('#resetButton')
+const cards = document.querySelectorAll('.cardImgs')
+let score = 0
 
-//build the tile
-for (let i = 0; i < boxCount; i++) {
-  const randomIndex = Math.floor(Math.random() * imgsPickList.length) //picks a random index from the array
-  const color = imgsPickList[randomIndex] //we get the color from the index
+const init = () => {
+  score = 0
+  result.innerHTML = ''
+  //build the tile
+  for (let i = 0; i < boxCount; i++) {
+    const randomIndex = Math.floor(Math.random() * imgsPickList.length) //picks a random index from the array
+    const color = imgsPickList[randomIndex] //we get the color from the index
+    shuffledList.push(color)
+  }
+  console.log(shuffledList)
+
+  creatCards()
 }
 
 //to loop through the list
@@ -24,7 +36,10 @@ const cardImgs = []
 const flippedCards = []
 
 function creatCards() {
-  for (let i = 0; i < imgsPickList.length; i++) {
+  if (cards) {
+    cardsContainer.innerHTML = ''
+  }
+  for (let i = 0; i < shuffledList.length; i++) {
     // create card
     const cardEl = document.createElement('div')
     cardEl.classList.add('card')
@@ -33,25 +48,36 @@ function creatCards() {
     // add card to cards array
     cardElements.push(cardEl)
     // add image filename path to cardImages array
-    cardImgs.push(imgsPickList[i])
+    cardImgs.push(shuffledList[i])
     cardsContainer.append(cardEl)
+  }
+
+  //the event lister
+
+  for (let i = 0; i < cardElements.length; i++) {
+    cardElements[i].addEventListener('click', () => flipCards(i))
   }
 }
 
 function flipCards(index) {
+  if (flippedCards.length === 2) return
   flippedCards.push(index)
-  console.log(flippedCards)
+  // console.log(flippedCards)
   const img = cardImgs[index]
   event.target.setAttribute('style', `background-color: ${img}`) // event.target finds the HTML element <div> we need to style
 
   if (flippedCards.length === 2) {
+    // Disable cards
     let card1 = cardElements[flippedCards[0]]
     console.log(card1.getAttribute('style'))
     let card2 = cardElements[flippedCards[1]]
     console.log(card2.getAttribute('style'))
     if (card1.getAttribute('style') === card2.getAttribute('style')) {
+      console.log('match')
+      score++
       flippedCards.length = 0 //it resets the indexes so we move to getting another two cards macthed
     } else {
+      console.log('not a match')
       setTimeout(() => {
         card1.removeAttribute('style') //so it removes the style
         card2.removeAttribute('style')
@@ -59,15 +85,16 @@ function flipCards(index) {
       }, 1000) // the 1000 is to delay the cards flipping back
     }
   }
+
+  checkForWinner()
 }
 
-creatCards()
-//the event lister
-const cards = document.querySelectorAll('.cardImgs')
-
-for (let i = 0; i < cardElements.length; i++) {
-  cardElements[i].addEventListener('click', () => flipCards(i))
+const checkForWinner = () => {
+  if (score >= imgs.length) {
+    winner = true
+    result.innerHTML = 'YOU WON!!!'
+  }
 }
 
-//toggle will help with the changing of images
-//class = card flipped
+resetButtonEl.addEventListener('click', init)
+init()
